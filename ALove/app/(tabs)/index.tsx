@@ -291,4 +291,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  flowerImage: {
+    width: 380,
+    height: 295,
+    resizeMode: 'contain',
+  },
 }); 
