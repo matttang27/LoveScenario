@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { Image, TextInput, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { ChuWave } from '@/components/chuemoji';
 
+//import { createStackNavigator } from '@react-navigation/stack';
+import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 
+//const Stack = createStackNavigator();
+
+
+
 export default function HomeScreen() {
+  //const { isSignedIn } = useAuth();
+  const router = useRouter();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,12 +33,13 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
+          source={require('@/assets/images/rose-background.jpeg')}
           style={styles.reactLogo}
         />
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Artificial Love</ThemedText>
+        <ChuWave />
       </ThemedView>
 
       <ThemedView>
@@ -136,5 +148,13 @@ const styles = StyleSheet.create({
   registerContainer: {
     marginTop: 20,
     alignItems: 'center',
+    backgroundColor: '#f4f4f4', // Add background color if you want the rounded corners to be visible
+    padding: 10, // Add some padding for better spacing inside the container
+    borderRadius: 12, // This will make the container corners rounded
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
   },
-});
+}); 
