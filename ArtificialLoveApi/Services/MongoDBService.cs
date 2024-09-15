@@ -21,7 +21,7 @@ public class MongoDBService {
     }
     
     public async Task<User> GetAsync(string id) {
-        FilterDefinition<User> filter = Builders<User>.Filter.Eq("Id", id);
+        var filter = Builders<User>.Filter.Eq("Id", id);
         return await _userCollection.Find(filter).FirstOrDefaultAsync();
     }
 
