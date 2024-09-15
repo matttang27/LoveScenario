@@ -1,16 +1,14 @@
+import React, { useEffect, useState } from 'react'; // Import useEffect and useState from 'react'
+import { Image, TextInput, StyleSheet, View, TouchableOpacity, ScrollView } from 'react-native';
+import { useRouter } from 'expo-router';
 import { ChuWave } from '@/components/chuemoji';
-import { useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
-
-import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { useAuth } from '@/context/AuthContext';
 
-
-
 export default function HomeScreen() {
-  
+  const router = useRouter();
   const { isSignedIn, signIn } = useAuth();
   console.log(isSignedIn);
   const [messages, setMessages] = useState<{ text: string; sentByMe: boolean }[]>([]);
@@ -33,24 +31,21 @@ export default function HomeScreen() {
     }
   };
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     signIn();
   };
 
   const handleRegister = () => {
-    // Navigate to Register Page
+    router.push('register'); // Navigate to RegisterScreen
   };
 
   if (isSignedIn) {
-
-    
-
     return (
       <ParallaxScrollView
-        headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+        headerBackgroundColor={{ light: '#ffdab9', dark: '#1D3D47' }}
         headerImage={
           <View>
             <Image
@@ -58,12 +53,13 @@ export default function HomeScreen() {
               style={styles.flowerImage}
             />
           </View>
-        }>
+        }
+      >
         {/* Header with chat partner's name */}
         <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Chat with Emma</ThemedText>
         </ThemedView>
-  
+
         {/* Chat Messages */}
         <ScrollView contentContainerStyle={styles.chatContainer}>
           {messages.map((message, index) => (
@@ -72,19 +68,21 @@ export default function HomeScreen() {
               style={[
                 styles.messageContainer,
                 message.sentByMe ? styles.sentMessage : styles.receivedMessage,
-              ]}>
+              ]}
+            >
               <ThemedText
                 type="default"
                 style={[
                   styles.messageText,
                   message.sentByMe ? styles.sentText : styles.receivedText,
-                ]}>
+                ]}
+              >
                 {message.text}
               </ThemedText>
             </View>
           ))}
         </ScrollView>
-  
+
         {/* Input and Send Button */}
         <ThemedView style={styles.inputContainer}>
           <TextInput
@@ -102,10 +100,9 @@ export default function HomeScreen() {
       </ParallaxScrollView>
     );
   } else {
-    
     return (
       <ParallaxScrollView
-        headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+        headerBackgroundColor={{ light: '#ffdab9', dark: '#1D3D47' }}
         headerImage={
           <View>
             <Image
@@ -113,22 +110,23 @@ export default function HomeScreen() {
               style={styles.flowerImage}
             />
           </View>
-        }>
+        }
+      >
         <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Fake Love</ThemedText>
+          <ThemedText type="title">Love Scenario</ThemedText>
           <ChuWave />
         </ThemedView>
 
         <ThemedView>
           <ThemedText type="defaultSemiBold">Finding a match doesn't have to be hard.</ThemedText>
         </ThemedView>
-  
+
         {/* Login Section */}
         <ThemedView style={styles.authContainer}>
           <ThemedText type="subtitle" style={styles.authTitle}>
             Login
           </ThemedText>
-  
+
           <TextInput
             style={styles.input}
             value={email}
@@ -137,7 +135,7 @@ export default function HomeScreen() {
             keyboardType="email-address"
             autoCapitalize="none"
           />
-  
+
           <TextInput
             style={styles.input}
             value={password}
@@ -145,13 +143,13 @@ export default function HomeScreen() {
             placeholder="Enter your password"
             secureTextEntry
           />
-  
+
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <ThemedText type="defaultSemiBold" style={styles.buttonText}>
-              mAIke love now!
+              Match now!
             </ThemedText>
           </TouchableOpacity>
-  
+
           <TouchableOpacity style={styles.registerContainer}>
             <ThemedText type="default">Don't have an account?</ThemedText>
             <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
@@ -164,8 +162,6 @@ export default function HomeScreen() {
       </ParallaxScrollView>
     );
   }
-  
-  
 }
 
 const styles = StyleSheet.create({
@@ -199,17 +195,17 @@ const styles = StyleSheet.create({
   },
   sentMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#A1CEDC', // Light blue for your messages
+    backgroundColor: '#f4978e', // Salmon for your messages
   },
   receivedMessage: {
     alignSelf: 'flex-start',
-    backgroundColor: '#1D3D47', // Dark blue for their messages
+    backgroundColor: '#f08080', // Light Coral for their messages
   },
   messageText: {
     fontSize: 16,
   },
   sentText: {
-    color: '#000', // Text color for your messages
+    color: '#fff', // Text color for your messages
   },
   receivedText: {
     color: '#fff', // Text color for their messages
@@ -221,7 +217,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopColor: '#ccc',
     borderTopWidth: 1,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: '#ffdab9', // Peach Puff for the input area
   },
   input: {
     flex: 1,
@@ -230,9 +226,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
+    backgroundColor: '#fff',
   },
   sendButton: {
-    backgroundColor: '#1D3D47',
+    backgroundColor: '#f4978e', // Salmon for the send button
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 20,
@@ -251,8 +248,8 @@ const styles = StyleSheet.create({
   authContainer: {
     marginTop: 20,
     paddingHorizontal: 20,
-    paddingVertical:   30,
-    backgroundColor: '#f4f4f4',
+    paddingVertical: 30,
+    backgroundColor: '#ffdab9', // Peach Puff for the auth container
     borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -265,14 +262,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#1D3D47',
+    backgroundColor: '#f4978e', // Salmon for the login button
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: 'center',
     marginTop: 10,
   },
   registerButton: {
-    backgroundColor: '#1D3D47',
+    backgroundColor: '#f4978e', // Salmon for the register button
     borderRadius: 8,
     paddingVertical: 8, // Adjusted to fit text better
     paddingHorizontal: 20, // Added padding to ensure the text fits well
@@ -282,7 +279,7 @@ const styles = StyleSheet.create({
   registerContainer: {
     marginTop: 20,
     alignItems: 'center',
-    backgroundColor: '#f4f4f4', // Add background color if you want the rounded corners to be visible
+    backgroundColor: '#ffdab9', // Peach Puff for the register container background
     padding: 10, // Add some padding for better spacing inside the container
     borderRadius: 12, // This will make the container corners rounded
     shadowColor: '#000',
@@ -296,4 +293,4 @@ const styles = StyleSheet.create({
     height: 295,
     resizeMode: 'contain',
   },
-}); 
+});

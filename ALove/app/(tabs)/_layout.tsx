@@ -22,25 +22,29 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
+
+<Tabs.Screen
+        name="register"
+        options={{  
+          title: 'register',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
         }}
       />
 
-<Tabs.Screen
-        name="third"
-        options={{
-          title: 'third',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
-          ),
-        }}
-      />
+  <Tabs.Screen
+          name="survey"
+          options={{  
+            title: 'survey',
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            ),
+          }}
+        />
+        
     </Tabs>
+
+    
   );
 }
