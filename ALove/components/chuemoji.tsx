@@ -34,7 +34,7 @@ export function ChuWave() {
 
 const styles = StyleSheet.create({
   image: {
-    width: 60,  // Customize the size as needed
-    height: 60, // Customize the size as needed
+    width: 145,  // Customize the size as needed
+    height: 145, // Customize the size as needed
   },
 });

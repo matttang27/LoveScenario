@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
 
 type AuthContextType = {
   isSignedIn: boolean;
@@ -21,11 +22,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     checkAuthStatus();
   }, []);
 
-  const signIn = () => {
+  const signIn = async () => {
+    //await AsyncStorage.setItem('userToken', 'your-auth-token');
     setIsSignedIn(true);
   };
 
-  const signOut = () => {
+  const signOut = async () => {
+    //await AsyncStorage.removeItem('userToken');
     setIsSignedIn(false);
   };
 
@@ -46,5 +49,6 @@ export const useAuth = () => {
 
 // Example async function to get user token (replace with actual implementation)
 const getUserToken = async () => {
-  return null; // Return null or a token from AsyncStorage or secure storage
+  //const token = await AsyncStorage.getItem('userToken');
+  return null;
 };
